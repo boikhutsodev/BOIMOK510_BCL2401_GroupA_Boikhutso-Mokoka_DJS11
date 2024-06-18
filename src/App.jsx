@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled, ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
+import Sidebar from "./components/Sidebar";
 
 const Container = styled.div`
   background: ${({ theme }) => theme.bg};
@@ -14,7 +15,10 @@ function App() {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <Container>PodStream</Container>
+      <Container>
+        <Sidebar />
+        PodStream
+      </Container>
     </ThemeProvider>
   );
 }

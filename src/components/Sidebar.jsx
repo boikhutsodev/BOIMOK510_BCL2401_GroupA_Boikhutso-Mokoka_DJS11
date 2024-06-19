@@ -27,6 +27,12 @@ const Logo = styled.div`
   font-weight: bold;
   margin: 16px 0px;
 `;
+const Close = styled.div`
+  display: none;
+  @media (max-width: 1100px) {
+    display: block;
+  }
+`;
 const Elements = styled.div``;
 const NavTex = styled.div``;
 
@@ -35,9 +41,9 @@ const Sidebar = () => {
     <MenuContainer>
       <Flex>
         <Logo>Cinematic</Logo>
-        <close>
+        <Close>
           <CloseRounded />
-        </close>
+        </Close>
       </Flex>
       <Elements>
         <HomeRounded />

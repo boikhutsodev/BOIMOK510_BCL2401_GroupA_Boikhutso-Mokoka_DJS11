@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { HomeRounded, CloseRounded } from "@mui/icons-material";
+import LogoImage from "/Images/podcasts.svg";
 
 const MenuContainer = styled.div`
   flex: 0.5;
@@ -18,6 +19,7 @@ const Flex = styled.div`
 `;
 
 const Logo = styled.div`
+  width: 100%;
   color: ${({ theme }) => theme.primary};
   display: flex;
   align-items: center;
@@ -27,20 +29,43 @@ const Logo = styled.div`
   font-weight: bold;
   margin: 16px 0px;
 `;
+
+const Image = styled.img`
+  height: 40px;
+`;
+
 const Close = styled.div`
   display: none;
   @media (max-width: 1100px) {
     display: block;
   }
 `;
-const Elements = styled.div``;
-const NavTex = styled.div``;
+const Elements = styled.div`
+  padding: 4px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  gap: 12px;
+  color: ${({ theme }) => theme.secondary};
+  width: 100%;
+  &: hover {
+    background: ${({ theme }) => theme.text_secondary};
+  }
+`;
+const NavTex = styled.div`
+  padding: 12px 0px;
+`;
 
 const Sidebar = () => {
   return (
     <MenuContainer>
       <Flex>
-        <Logo>Cinematic</Logo>
+        <Logo>
+          <Image src={LogoImage} />
+          Cinematic
+        </Logo>
         <Close>
           <CloseRounded />
         </Close>

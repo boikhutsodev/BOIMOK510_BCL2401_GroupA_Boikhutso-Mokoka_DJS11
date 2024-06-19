@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { HomeRounded, CloseRounded } from "@mui/icons-material";
+import {
+  HomeRounded,
+  CloseRounded,
+  SearchRounded,
+  LightModeRounded,
+  UploadRounded,
+  LogoutRounded,
+  FavoriteRounded,
+} from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
 
 const MenuContainer = styled.div`
@@ -73,6 +81,26 @@ const Sidebar = () => {
       <Elements>
         <HomeRounded />
         <NavTex>Dashboard</NavTex>
+      </Elements>
+      <Elements>
+        <SearchRounded />
+        <NavTex>Search</NavTex>
+      </Elements>
+      <Elements>
+        <FavoriteRounded />
+        <NavTex>Favourites</NavTex>
+      </Elements>
+      <Elements>
+        <UploadRounded />
+        <NavTex>Upload</NavTex>
+      </Elements>
+      <Elements>
+        <LightModeRounded />
+        <NavTex>Light Mode</NavTex>
+      </Elements>
+      <Elements>
+        <LogoutRounded />
+        <NavTex>Log Out</NavTex>
       </Elements>
     </MenuContainer>
   );

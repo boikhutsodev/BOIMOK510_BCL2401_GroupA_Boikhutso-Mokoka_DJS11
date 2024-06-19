@@ -12,7 +12,7 @@ import {
 import LogoImage from "/Images/podcasts.svg";
 
 const MenuContainer = styled.div`
-  flex: 0.5;
+  flex: 0.25; // changed from 0.5
   flex-direction: column;
   height: 100vh;
   display: flex;

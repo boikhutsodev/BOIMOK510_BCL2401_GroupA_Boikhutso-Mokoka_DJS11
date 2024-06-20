@@ -9,6 +9,7 @@ import {
   LogoutRounded,
   FavoriteRounded,
   DarkModeRounded,
+  CloudUploadRounded,
 } from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
 import { Link } from "react-router-dom";
@@ -38,7 +39,6 @@ const Flex = styled.div`
 `;
 
 const Logo = styled.div`
-  width: 100%;
   color: ${({ theme }) => theme.primary};
   display: flex;
   align-items: center;
@@ -106,7 +106,7 @@ const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
     {
       fun: () => console.log("upload"),
       name: "Upload",
-      icon: <UploadRounded />,
+      icon: <CloudUploadRounded />,
     },
     {
       fun: () => setDarkMode(!darkMode),

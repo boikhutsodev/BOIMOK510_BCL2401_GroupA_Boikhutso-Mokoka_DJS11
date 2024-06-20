@@ -3,6 +3,7 @@ import { styled, ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter } from "react-router-dom";
+import NavBar from "./components/NavBar";
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +35,10 @@ function App() {
             setDarkMode={setDarkMode}
             darkMode={darkMode}
           />
-          <Frame>Cinematic</Frame>
+          <Frame>
+            <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+            Cinematic
+          </Frame>
         </Container>
       </BrowserRouter>
     </ThemeProvider>

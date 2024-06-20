@@ -10,6 +10,7 @@ import {
   FavoriteRounded,
 } from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
+import { BrowserRouter as Link } from "react-router-dom";
 
 const MenuContainer = styled.div`
   flex: 0.25; // changed from 0.5
@@ -78,10 +79,12 @@ const Sidebar = () => {
           <CloseRounded />
         </Close>
       </Flex>
-      <Elements>
-        <HomeRounded />
-        <NavTex>Dashboard</NavTex>
-      </Elements>
+      <Link to="/">
+        <Elements>
+          <HomeRounded />
+          <NavTex>Dashboard</NavTex>
+        </Elements>
+      </Link>
       <Elements>
         <SearchRounded />
         <NavTex>Search</NavTex>

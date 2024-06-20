@@ -57,17 +57,14 @@ const Elements = styled.div`
   align-items: center;
   cursor: pointer;
   gap: 12px;
-  color: ${({ theme }) => theme.secondary};
-  text-decoration: none !important;
-  !important
+  color: ${({ theme }) => theme.text_secondary};
   &: hover {
     background: ${({ theme }) => theme.text_secondary + 50};
-    border-redius: 50%;
   }
 `;
 const NavText = styled.div`
   padding: 12px 0px;
-  text-decoration: none !important;
+  text-decoration: none;
 `;
 
 const HRLine = styled.div`

@@ -14,18 +14,18 @@ import LogoImage from "/Images/podcasts.svg";
 import { Link } from "react-router-dom";
 
 const MenuContainer = styled.div`
-  flex: 0.25; // changed from 0.5
+  flex: 0.5; // changed from 0.5
   flex-direction: column;
   height: 100vh;
   display: flex;
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text_primary};
-  @media (ma-width: 1100px) {
+  @media (max-width: 1100px) {
     position: fixed;
     z-index: 1000;
     width: 100%;
     max-width: 250px;
-    left: ${({ menuOpen }) => (menuOpen ? "0" : "-100%")};
+    left: ${({ $menuOpen }) => ($menuOpen ? "0" : "-100%")};
     transition: left 0.3s ease-in-out;
   }
 `;
@@ -73,7 +73,6 @@ const Elements = styled.div`
 `;
 const NavText = styled.div`
   padding: 12px 0px;
-  text-decoration: none;
 `;
 
 const HRLine = styled.div`
@@ -121,7 +120,7 @@ const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
   ];
 
   return (
-    <MenuContainer menuOpen={menuOpen}>
+    <MenuContainer $menuOpen={menuOpen}>
       <Flex>
         <Logo>
           <Image src={LogoImage} />

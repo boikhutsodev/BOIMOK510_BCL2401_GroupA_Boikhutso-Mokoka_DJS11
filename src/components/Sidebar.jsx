@@ -11,7 +11,6 @@ import {
 } from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
 import { Link } from "react-router-dom";
-import { css } from "@mui/material";
 
 const MenuContainer = styled.div`
   flex: 0.25; // changed from 0.5
@@ -59,17 +58,24 @@ const Elements = styled.div`
   cursor: pointer;
   gap: 12px;
   color: ${({ theme }) => theme.secondary};
-  width: 100%;
+  text-decoration: none !important;
+  !important
   &: hover {
-    background: ${({ theme }) => theme.text_secondary};
+    background: ${({ theme }) => theme.text_secondary + 50};
+    border-redius: 50%;
   }
 `;
 const NavText = styled.div`
   padding: 12px 0px;
-  text-decoration: none; !important
+  text-decoration: none !important;
 `;
 
-const HR = styled.div``;
+const HRLine = styled.div`
+width: 100%;
+height: 1px
+margin: 10px 0px;
+border: 1px solid ${({ theme }) => theme.text_secondary};
+`;
 
 const menuItems = [
   {
@@ -120,14 +126,24 @@ const Sidebar = () => {
         </Close>
       </Flex>
       {menuItems.map((item) => (
-        <Link to={item.link} key={item.name}>
+        <Link
+          to={item.link}
+          key={item.name}
+          styled={{ textDecoration: "none" }}
+        >
           <Elements>
             {item.icon}
             <NavText>{item.name}</NavText>
           </Elements>
         </Link>
       ))}
-      <HR />
+      <HRLine />
+      {button.map((item) => (
+        <Elements onClick={item.fun} key={item.name}>
+          {item.icon}
+          <NavText>{item.name}</NavText>
+        </Elements>
+      ))}
     </MenuContainer>
   );
 };

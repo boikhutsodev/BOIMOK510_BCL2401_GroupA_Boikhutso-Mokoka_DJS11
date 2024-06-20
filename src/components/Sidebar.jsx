@@ -33,7 +33,8 @@ const Flex = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0px 12px;
 `;
 
 const Logo = styled.div`
@@ -76,10 +77,10 @@ const NavText = styled.div`
 `;
 
 const HRLine = styled.div`
-width: 100%;
-height: 1px
-margin: 10px 0px;
-border: 1px solid ${({ theme }) => theme.text_secondary};
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.text_secondary + 50};
+  margin: 10px 0px;
 `;
 
 const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
@@ -124,7 +125,7 @@ const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
       <Flex>
         <Logo>
           <Image src={LogoImage} />
-          Cinematic
+          CINEMATIC
         </Logo>
         <Close onClick={() => setMenuOpen(false)}>
           <CloseRounded />

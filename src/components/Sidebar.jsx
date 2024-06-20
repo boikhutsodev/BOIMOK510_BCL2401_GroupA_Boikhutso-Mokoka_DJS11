@@ -20,6 +20,14 @@ const MenuContainer = styled.div`
   display: flex;
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text_primary};
+  @media (ma-width: 1100px) {
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    max-width: 250px;
+    left: ${({ menuOpen }) => (menuOpen ? "0" : "-100%")};
+    transition: left 0.3s ease-in-out;
+  }
 `;
 const Flex = styled.div`
   display: flex;
@@ -113,13 +121,13 @@ const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
   ];
 
   return (
-    <MenuContainer>
+    <MenuContainer menuOpen={menuOpen}>
       <Flex>
         <Logo>
           <Image src={LogoImage} />
           Cinematic
         </Logo>
-        <Close>
+        <Close onClick={() => setMenuOpen(false)}>
           <CloseRounded />
         </Close>
       </Flex>

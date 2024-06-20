@@ -123,11 +123,7 @@ const Sidebar = () => {
         </Close>
       </Flex>
       {menuItems.map((item) => (
-        <Link
-          to={item.link}
-          key={item.name}
-          styled={{ textDecoration: "none" }}
-        >
+        <Link to={item.link} key={item.name} style={{ textDecoration: "none" }}>
           <Elements>
             {item.icon}
             <NavText>{item.name}</NavText>

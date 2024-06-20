@@ -10,7 +10,8 @@ import {
   FavoriteRounded,
 } from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { css } from "@mui/material";
 
 const MenuContainer = styled.div`
   flex: 0.25; // changed from 0.5
@@ -63,9 +64,48 @@ const Elements = styled.div`
     background: ${({ theme }) => theme.text_secondary};
   }
 `;
-const NavTex = styled.div`
+const NavText = styled.div`
   padding: 12px 0px;
+  text-decoration: none; !important
 `;
+
+const HR = styled.div``;
+
+const menuItems = [
+  {
+    link: "/dashboard",
+    name: "Dashboard",
+    icon: <HomeRounded />,
+  },
+  {
+    link: "/search",
+    name: "Search",
+    icon: <SearchRounded />,
+  },
+  {
+    link: "/favourites",
+    name: "Favourites",
+    icon: <FavoriteRounded />,
+  },
+];
+
+const button = [
+  {
+    fun: () => console.log("upload"),
+    name: "Upload",
+    icon: <UploadRounded />,
+  },
+  {
+    fun: () => console.log("Light Mode"),
+    name: "Light Mode",
+    icon: <LightModeRounded />,
+  },
+  {
+    fun: () => console.log("Log Out"),
+    name: "Log Out",
+    icon: <LogoutRounded />,
+  },
+];
 
 const Sidebar = () => {
   return (
@@ -79,32 +119,15 @@ const Sidebar = () => {
           <CloseRounded />
         </Close>
       </Flex>
-      <Link to="/">
-        <Elements>
-          <HomeRounded />
-          <NavTex>Dashboard</NavTex>
-        </Elements>
-      </Link>
-      <Elements>
-        <SearchRounded />
-        <NavTex>Search</NavTex>
-      </Elements>
-      <Elements>
-        <FavoriteRounded />
-        <NavTex>Favourites</NavTex>
-      </Elements>
-      <Elements>
-        <UploadRounded />
-        <NavTex>Upload</NavTex>
-      </Elements>
-      <Elements>
-        <LightModeRounded />
-        <NavTex>Light Mode</NavTex>
-      </Elements>
-      <Elements>
-        <LogoutRounded />
-        <NavTex>Log Out</NavTex>
-      </Elements>
+      {menuItems.map((item) => (
+        <Link to={item.link} key={item.name}>
+          <Elements>
+            {item.icon}
+            <NavText>{item.name}</NavText>
+          </Elements>
+        </Link>
+      ))}
+      <HR />
     </MenuContainer>
   );
 };

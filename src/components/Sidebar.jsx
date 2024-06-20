@@ -8,6 +8,7 @@ import {
   UploadRounded,
   LogoutRounded,
   FavoriteRounded,
+  DarkModeRounded,
 } from "@mui/icons-material";
 import LogoImage from "/Images/podcasts.svg";
 import { Link } from "react-router-dom";
@@ -74,43 +75,43 @@ margin: 10px 0px;
 border: 1px solid ${({ theme }) => theme.text_secondary};
 `;
 
-const menuItems = [
-  {
-    link: "/dashboard",
-    name: "Dashboard",
-    icon: <HomeRounded />,
-  },
-  {
-    link: "/search",
-    name: "Search",
-    icon: <SearchRounded />,
-  },
-  {
-    link: "/favourites",
-    name: "Favourites",
-    icon: <FavoriteRounded />,
-  },
-];
+const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
+  const menuItems = [
+    {
+      link: "/dashboard",
+      name: "Dashboard",
+      icon: <HomeRounded />,
+    },
+    {
+      link: "/search",
+      name: "Search",
+      icon: <SearchRounded />,
+    },
+    {
+      link: "/favourites",
+      name: "Favourites",
+      icon: <FavoriteRounded />,
+    },
+  ];
 
-const button = [
-  {
-    fun: () => console.log("upload"),
-    name: "Upload",
-    icon: <UploadRounded />,
-  },
-  {
-    fun: () => console.log("Light Mode"),
-    name: "Light Mode",
-    icon: <LightModeRounded />,
-  },
-  {
-    fun: () => console.log("Log Out"),
-    name: "Log Out",
-    icon: <LogoutRounded />,
-  },
-];
+  const button = [
+    {
+      fun: () => console.log("upload"),
+      name: "Upload",
+      icon: <UploadRounded />,
+    },
+    {
+      fun: () => setDarkMode(!darkMode),
+      name: darkMode ? "Light Mode" : "Dark Mode",
+      icon: darkMode ? <LightModeRounded /> : <DarkModeRounded />,
+    },
+    {
+      fun: () => console.log("Log Out"),
+      name: "Log Out",
+      icon: <LogoutRounded />,
+    },
+  ];
 
-const Sidebar = () => {
   return (
     <MenuContainer>
       <Flex>

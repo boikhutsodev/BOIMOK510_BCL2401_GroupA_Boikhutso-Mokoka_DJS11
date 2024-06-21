@@ -37,10 +37,10 @@ const IcoButton = styled(IconButton)`
   color: ${({ theme }) => theme.text_secondary} !important;
 `;
 
-const NavBar = () => {
+const NavBar = ({ setMenuOpen, menuOpen }) => {
   return (
     <NavBarDiv>
-      <IcoButton>
+      <IcoButton onClick={() => setMenuOpen(!menuOpen)}>
         <MenuIcon />
       </IcoButton>
       <ButtonDiv>

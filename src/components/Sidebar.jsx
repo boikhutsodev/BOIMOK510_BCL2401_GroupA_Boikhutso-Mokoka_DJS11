@@ -5,7 +5,6 @@ import {
   CloseRounded,
   SearchRounded,
   LightModeRounded,
-  UploadRounded,
   LogoutRounded,
   FavoriteRounded,
   DarkModeRounded,

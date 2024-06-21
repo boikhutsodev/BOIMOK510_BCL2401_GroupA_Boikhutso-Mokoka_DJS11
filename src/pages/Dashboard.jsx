@@ -6,13 +6,14 @@ import PodcastCard from "../components/PodcastCard";
 const DashboardMain = styled.div`
   padding: 20px 30px;
   padding-bottom: 200px;
-  height: 100%
+  height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 20px;
   @media (max-width: 768px) {
-  padding: 6px 10px;
+    padding: 6px 10px;
   }
 `;
 const FilterContainer = styled.div`
@@ -41,7 +42,16 @@ const Span = styled.div`
     font-size: 14px;
   }
 `;
-const Podcast = styled.div``;
+const Podcast = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 18px 6px;
+  @media (max-width: 550px) {
+    justify-content: center;
+  }
+`;
 
 const Dashboard = () => {
   return (
@@ -71,7 +81,6 @@ const Dashboard = () => {
           </Link>
         </Topic>
         <Podcast>
-          <PodcastCard />
           <PodcastCard />
           <PodcastCard />
         </Podcast>

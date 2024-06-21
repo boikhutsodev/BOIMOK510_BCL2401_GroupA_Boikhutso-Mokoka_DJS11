@@ -2,8 +2,9 @@ import { useState } from "react";
 import { styled, ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
 import Sidebar from "./components/Sidebar";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import Dashboard from "./pages/Dashboard";
 
 const Container = styled.div`
   display: flex;
@@ -39,7 +40,9 @@ function App() {
           )}
           <Frame>
             <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-            Cinematic
+            <Routes>
+              <Route path="/" exact element={<Dashboard />} />
+            </Routes>
           </Frame>
         </Container>
       </BrowserRouter>

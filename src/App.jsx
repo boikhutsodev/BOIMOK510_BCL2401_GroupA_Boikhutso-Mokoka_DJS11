@@ -1,16 +1,17 @@
-import { useState } from "react";
-import { styled, ThemeProvider } from "styled-components";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./utils/Themes";
 import Sidebar from "./components/Sidebar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Dashboard from "./pages/Dashboard";
-import Search from "./pages/Search";
-import Favourites from "./pages/Favourite";
-import Profile from "./pages/Profile";
-import PodcastDetails from "./pages/PodcastDetails";
-import DisplayPodcast from "./pages/DisplayPodcast";
+import { Dashboard } from "./pages/Dashboard";
+import { Search } from "./pages/Search";
+import { Favourites } from "./pages/Favourites";
+import { Profile } from "./pages/Profile";
+import { PodcastDetails } from "./pages/PodcastDetails";
+import { DisplayPodcast } from "./pages/DisplayPodcast";
 
+// Styled component for elements of the application
 const Container = styled.div`
   display: flex;
   background: ${({ theme }) => theme.bgLight};
@@ -27,7 +28,6 @@ const Frame = styled.div`
 `;
 
 function App() {
-  // hooks
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(true);
 

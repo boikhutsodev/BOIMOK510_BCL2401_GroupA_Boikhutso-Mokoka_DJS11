@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
@@ -151,30 +150,28 @@ const Updated = styled.div`
   width: max-content;
 `;
 
-const DashboardMain = styled.div`
-  padding: 20px 30px;
-  padding-bottom: 200px;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  @media (max-width: 768px) {
-    padding: 6px 10px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  height: 100vh;
+  overflow-y: auto;
+`;
+
+const FavouriteContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 18px 6px;
+  @media (max-width: 550px) {
+    justify-content: center;
   }
 `;
 
-const FilterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.bg || "#f5f5f5"};
-  border-radius: 10px;
-  padding: 20px 30px;
-`;
-
 const Topic = styled.div`
-  color: ${({ theme }) => theme.text_primary || "#000"};
+  color: ${({ theme }) => theme.text_primary};
   font-size: 24px;
   font-weight: 500;
   display: flex;
@@ -185,32 +182,18 @@ const Topic = styled.div`
   }
 `;
 
-const Span = styled.div`
-  color: ${({ theme }) => theme.primary || "#007bff"};
-  font-size: 16px;
-  font-weight: 400;
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-`;
-
-const Podcasts = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  padding: 18px 6px;
-  @media (max-width: 550px) {
-    justify-content: center;
-  }
-`;
-
-const DisplayPodcast = ({ podcast }) => (
+const DisplayPodcast = ({ podcast, onFavouriteClick, isFavourite }) => (
   <Card>
     <div>
       <Top>
-        <Favourite>
-          <FavoriteIcon style={{ width: "16px", height: "16px" }} />
+        <Favourite onClick={() => onFavouriteClick(podcast)}>
+          <FavoriteIcon
+            style={{
+              width: "16px",
+              height: "16px",
+              color: isFavourite ? "red" : "white",
+            }}
+          />
         </Favourite>
         <CardImage src={podcast.image} alt="podcast-image" />
       </Top>
@@ -235,64 +218,100 @@ const DisplayPodcast = ({ podcast }) => (
   </Card>
 );
 
-const getRandomPodcasts = (podcasts, count) => {
-  const shuffled = podcasts.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-};
-
-export const Dashboard = () => {
+export const Favourites = () => {
   const [podcasts, setPodcasts] = useState([]);
-  const [recommended, setRecommended] = useState([]);
+  const [favourites, setFavourites] = useState(() => {
+    const savedFavourites = localStorage.getItem("favourites");
+    return savedFavourites ? JSON.parse(savedFavourites) : [];
+  });
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
       .then((response) => response.json())
       .then((data) => {
-        // Sort podcasts alphabetically by title
-        const sortedPodcasts = data.sort((a, b) =>
-          a.title.localeCompare(b.title)
-        );
-        setPodcasts(data.slice(0, 4));
-        setRecommended(getRandomPodcasts(data, 4));
+        // Initial sorting when data is fetched
+        setPodcasts(data.sort((a, b) => a.title.localeCompare(b.title)));
       })
       .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
-  return (
-    <DashboardMain>
-      <FilterContainer>
-        <Topic>
-          Podcasts
-          <Link
-            to={`/showpodcasts/podcasts`}
-            style={{ textDecoration: "none" }}
-          >
-            <Span>Show All</Span>
-          </Link>
-        </Topic>
-        <Podcasts>
-          {podcasts.map((podcast) => (
-            <DisplayPodcast key={podcast.id} podcast={podcast} />
-          ))}
-        </Podcasts>
-      </FilterContainer>
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
 
-      <FilterContainer>
-        <Topic>
-          Recommended
-          <Link
-            to={`/showpodcasts/recommended`}
-            style={{ textDecoration: "none" }}
-          >
-            <Span>Show All</Span>
-          </Link>
-        </Topic>
-        <Podcasts>
-          {recommended.map((podcast) => (
-            <DisplayPodcast key={podcast.id} podcast={podcast} />
-          ))}
-        </Podcasts>
-      </FilterContainer>
-    </DashboardMain>
+  const handleFavouriteClick = (podcast) => {
+    setFavourites((prevFavourites) => {
+      const isFavourite = prevFavourites.some((fav) => fav.id === podcast.id);
+      if (isFavourite) {
+        return prevFavourites.filter((fav) => fav.id !== podcast.id);
+      } else {
+        return [...prevFavourites, podcast];
+      }
+    });
+  };
+
+  const sortAZ = () => {
+    setPodcasts([...podcasts].sort((a, b) => a.title.localeCompare(b.title)));
+  };
+
+  const sortZA = () => {
+    setPodcasts([...podcasts].sort((a, b) => b.title.localeCompare(a.title)));
+  };
+
+  const sortByRecent = () => {
+    setPodcasts(
+      [...podcasts].sort((a, b) => new Date(b.updated) - new Date(a.updated))
+    );
+  };
+
+  const sortByOldest = () => {
+    setPodcasts(
+      [...podcasts].sort((a, b) => new Date(a.updated) - new Date(b.updated))
+    );
+  };
+
+  return (
+    <Container>
+      <Topic>
+        Favourites 
+        <div className="sortingContainer">
+          <button onClick={sortAZ} className="sortingBtn">
+            Sort A-Z
+          </button>
+          <button onClick={sortZA} className="sortingBtn">
+            Sort Z-A
+          </button>
+          <button onClick={sortByRecent} className="sortingBtn">
+            Recently Updated
+          </button>
+          <button onClick={sortByOldest} className="sortingBtn">
+            Furthest Updated
+          </button>
+        </div>
+      </Topic>
+      <FavouriteContainer>
+        {favourites.map((podcast) => (
+          <DisplayPodcast
+            key={podcast.id}
+            podcast={podcast}
+            onFavouriteClick={handleFavouriteClick}
+            isFavourite={true}
+          />
+        ))}
+      </FavouriteContainer>
+      <Topic>All Podcasts</Topic>
+      <FavouriteContainer>
+        {podcasts.map((podcast) => (
+          <DisplayPodcast
+            key={podcast.id}
+            podcast={podcast}
+            onFavouriteClick={handleFavouriteClick}
+            isFavourite={favourites.some((fav) => fav.id === podcast.id)}
+          />
+        ))}
+      </FavouriteContainer>
+    </Container>
   );
 };
+
+export default Favourites;

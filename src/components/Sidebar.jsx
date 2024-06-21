@@ -85,7 +85,7 @@ const HRLine = styled.div`
 const Sidebar = ({ menuOpen, setMenuOpen, setDarkMode, darkMode }) => {
   const menuItems = [
     {
-      link: "/dashboard",
+      link: "/",
       name: "Dashboard",
       icon: <HomeRounded />,
     },

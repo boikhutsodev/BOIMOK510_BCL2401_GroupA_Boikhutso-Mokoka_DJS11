@@ -5,6 +5,11 @@ import Sidebar from "./components/Sidebar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
+import Search from "./pages/Search";
+import Favourites from "./pages/Favourite";
+import Profile from "./pages/Profile";
+import PodcastDetails from "./pages/PodcastDetails";
+import DisplayPodcast from "./pages/DisplayPodcast";
 
 const Container = styled.div`
   display: flex;
@@ -41,7 +46,16 @@ function App() {
           <Frame>
             <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Routes>
-              <Route path="/" exact element={<Dashboard />} />
+              <Route path="/dashboard" exact element={<Dashboard />} />
+              <Route path="/search" exact element={<Search />} />
+              <Route path="/favourites" exact element={<Favourites />} />
+              <Route path="/profile" exact element={<Profile />} />
+              <Route path="/podcast/:id" exact element={<PodcastDetails />} />
+              <Route
+                path="/showpodcasts/:type"
+                exact
+                element={<DisplayPodcast />}
+              />
             </Routes>
           </Frame>
         </Container>
